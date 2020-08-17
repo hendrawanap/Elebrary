@@ -1,0 +1,66 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  display: grid;
+  width: 1140px;
+  margin: 0 auto;
+  grid-template-areas: 'topbar topbar' 'header header' 'sidebar collection' 'statistics statistics' 'spaces spaces' 'donate-bar donate-bar' 'footer footer';
+  grid-column: 1fr 2fr;
+}
+
+/* topbar & navbar */
+div.topbar {
+  grid-area: topbar;
+  display: grid;
+  grid-column: 1fr 2fr;
+}
+
+div.topbar .logo {
+  display: flex;
+  justify-content: start;
+}
+
+div.navbar {
+  
+}
+
+/* header */
+div.header {
+  grid-area: header;
+}
+
+/* sidebar, search-bar, categories, instagram, top-bloggers */
+div.sidebar {
+  grid-area: sidebar;
+}
+
+/* collection */
+div.collection {
+  grid-area: collection;
+}
+
+/* statistics */
+div.statistics {
+  grid-area: statistics;
+}
+
+/* spaces */
+div.spaces {
+  grid-area: spaces;
+}
+
+/* donate-bar */
+div.donate-bar {
+  grid-area: donate-bar;
+}
+
+/* footer */
+div.footer {
+  grid-area: footer;
+}
+
+  
