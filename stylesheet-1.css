@@ -4,43 +4,212 @@
   box-sizing: border-box;
 }
 
+a {
+  text-decoration: none;
+}
+
 .container {
   display: grid;
   width: 1140px;
   margin: 0 auto;
   grid-template-areas: 'topbar topbar' 'header header' 'sidebar collection' 'statistics statistics' 'spaces spaces' 'donate-bar donate-bar' 'footer footer';
-  grid-column: 1fr 2fr;
+  grid-template-columns: 1fr 2fr;
+  column-gap: 36px;
+}
+
+.btn {
+  background-color: rgb(66,196,227);
+  color: white;
+  padding: 16px;
+  cursor: pointer;
+}
+
+.card {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: rgb(243,244,248);
+  padding: 24px;
+  margin-bottom: 16px;
+}
+
+.card h3 {
+  width: 100%;
+  font-size: 20px;
+  color: rgb(53,62,96);
+}
+
+.mini-card {
+  display: grid;
+  grid-template-columns: 0.8fr 2fr;
+  column-gap: 20px;
+  margin: 16px 0;
+}
+
+.mini-card img {
+  width: 100%;
+}
+
+.mini-card .info {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-around;
+}
+
+.mini-card .title, .mini-card .subtitle{
+  width: 100%;
+}
+
+.mini-card .title {
+  font-size: 20px;
+  font-weight: bold;
+  color: rgb(53,62,96);
+}
+
+.mini-card .subtitle {
+  font-size: 18px;
+  font-weight: 500;
+  color: rgb(163,166,177);
 }
 
 /* topbar & navbar */
 div.topbar {
   grid-area: topbar;
   display: grid;
-  grid-column: 1fr 2fr;
+  grid-template-columns: auto 640px;
+  justify-content: space-between;
+  padding: 30px 0;
 }
 
 div.topbar .logo {
   display: flex;
-  justify-content: start;
+  align-items: center;
+}
+
+.logo span {
+  display: block;
+  color: rgb(53,62,96);
+}
+
+.logo .brand {
+  font-size: 24px;
 }
 
 div.navbar {
-  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar a {
+  color: rgb(163,166,177);
+}
+
+.navbar a.active {
+  color: rgb(53,62,96);
+  font-weight: bold;
+}
+
+.btn-login {
+  padding: 10px 20px;
 }
 
 /* header */
 div.header {
   grid-area: header;
+  font-size: 72px;
+  color: rgb(53,62,96);
+  padding-top: 80px;
+  padding-bottom: 200px;
 }
 
 /* sidebar, search-bar, categories, instagram, top-bloggers */
 div.sidebar {
   grid-area: sidebar;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+div.search-bar {
+  display: flex;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.search-bar input {
+  width: 100%;
+  background-color: rgb(243,244,248);
+  border: none;
+  padding-left: 16px;
+  font-size: 16px;
+}
+
+div.btn-search {
+  padding: 12px;
+}
+
+div.categories {
+  padding: 0;
+  flex-direction: column;
+}
+
+.categories h3 {
+  padding: 24px;
+}
+
+.categories ul {
+  list-style: none;
+  margin-bottom: 24px;
+}
+
+.categories li {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 24px;
+  color: rgb(163,166,177);
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0.6px;
+}
+
+.categories li:hover , .categories li.active{
+  background-color: white;
+  color: rgb(66,196,227);
+  opacity: 0.6;
+  border-left: 3px rgb(66,196,227) solid;
+}
+
+.instagram {
+  justify-content: space-between;
+}
+
+.instagram img {
+  width: 45%;
+  margin: 16px 0;
 }
 
 /* collection */
-div.collection {
+div.collection h2 {
+  color: rgb(53,62,96);
+  font-size: 48px;
+  line-height: 80%;
+  margin-bottom: 50px;
+}
+
+.collection .img-container{
   grid-area: collection;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.collection img {
+  padding: 10px;
+  margin-bottom: 28px;
+  background-color: rgb(243,244,248);
+  box-shadow: 5px 5px 5px rgb(163,166,177);
+  width: 47%;
 }
 
 /* statistics */
@@ -61,6 +230,55 @@ div.donate-bar {
 /* footer */
 div.footer {
   grid-area: footer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* Rules for sizing the icon. */
+.material-icons.md-18,
+.material-icons-outlined.md-18 {
+  font-size: 18px;
+}
+.material-icons.md-24,
+.material-icons-outlined.md-24 {
+  font-size: 24px;
+}
+.material-icons.md-36,
+.material-icons-outlined.md-36 {
+  font-size: 36px;
+}
+.material-icons.md-48,
+.material-icons-outlined.md-48 {
+  font-size: 48px;
+}
+
+/* Rules for using icons as black on a light background. */
+.material-icons.md-dark,
+.material-icons-outlined.md-dark {
+  color: rgba(0, 0, 0, 0.54);
+}
+.material-icons.md-dark.md-inactive,
+.material-icons-outlined.md-dark.md-inactive {
+  color: rgba(0, 0, 0, 0.26);
+}
+
+/* Rules for using icons as white on a dark background. */
+.material-icons.md-light,
+.material-icons-outlined.md-light {
+  color: rgba(255, 255, 255, 1);
+}
+.material-icons.md-light.md-inactive,
+.material-icons-outlined.md-light.md-inactive {
+  color: rgba(255, 255, 255, 0.3);
 }
 
   

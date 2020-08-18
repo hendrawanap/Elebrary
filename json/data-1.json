@@ -1,4 +1,105 @@
 {
-  "navlist" : ["Home", "About", "Library Catalog", "Author", "Spaces & Room"],
-  "categories" : []
+  "navlist" : [
+    {
+      "nav" : "Home",
+      "dataHeader" : "Home"
+    },
+
+    {
+      "nav" : "About",
+      "dataHeader" : "About"
+    },
+
+    {
+      "nav" : "Library Catalog",
+      "dataHeader" : "Library <strong>Catalog</strong>"
+    },
+
+    {
+      "nav" : "Author",
+      "dataHeader" : "Meet Our Author"
+    },
+
+    {
+      "nav" : "Spaces & Room",
+      "dataHeader" : "Spaces & Room"
+    }
+  ],
+  
+
+  "categories" : [
+    {
+      "category" : "Art & Photography",
+      "counts" : 239
+    },
+    {
+      "category" : "Biography",
+      "counts" : 63
+    },
+    {
+      "category" : "Children's Books",
+      "counts" : 387
+    },
+    {
+      "category" : "Craft & Hobbies",
+      "counts" : 162
+    },
+    {
+      "category" : "Crime & Thriller",
+      "counts" : 281
+    },
+    {
+      "category" : "Fantasy & Horror",
+      "counts" : 335
+    },
+    {
+      "category" : "Fiction",
+      "counts" : 486
+    },
+    {
+      "category" : "Food & Drink",
+      "counts" : 84
+    },
+    {
+      "category" : "Graphic & Animation",
+      "counts" : 116
+    }
+  ],
+
+  "instagram" : [
+    "instagram/alabaster-co-lGlZJ1TyI8E-unsplash.jpg", 
+    "instagram/leonardo-miranda-J_aXm-1jOo0-unsplash.jpg", 
+    "instagram/olesia-buyar-ZD03qVhBJZg-unsplash.jpg", 
+    "instagram/reina-lovefull-0rfhmw6R4s4-unsplash.jpg"
+  ],
+
+  "bloggers" : [
+    
+    {
+      "name" : "Jully Scot",
+      "publishedBooks" : 29,
+      "imageLink" : "top_bloggers/daniil-lobachev-XAo09LtQiAQ-unsplash.jpg"
+    },
+    
+    {
+      "name" : "Jinifar Lorence",
+      "publishedBooks" : 17,
+      "imageLink" : "top_bloggers/art-hauntington-jzY0KRJopEI-unsplash.jpg"
+    },
+    
+    {
+      "name" : "Alison Murqas",
+      "publishedBooks" : 44,
+      "imageLink" : "top_bloggers/jorge-vicuna-EMe9pXBq2MI-unsplash.jpg"
+    }
+  ],
+
+  "restAPI" : [
+    {
+      "name" : "Play Books",
+      "link" : "https://www.googleapis.com/books/v1/volumes?q=",
+      "key" : "&key=AIzaSyDWFJN29BrPgMINpOFI9k2-4CibuzY-ysM"
+    }
+  ]
+
 }
