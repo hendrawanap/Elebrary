@@ -81,6 +81,7 @@ function addSearchBtnOnClick() {
     if (keyword != '') {
       buildCollection(keyword);
     }
+    $(".search-bar input").val("");
   });
 }
 
