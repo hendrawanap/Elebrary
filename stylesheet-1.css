@@ -8,13 +8,16 @@ a {
   text-decoration: none;
 }
 
-.container {
+.main {
   display: grid;
-  width: 1140px;
-  margin: 0 auto;
   grid-template-areas: 'topbar topbar' 'header header' 'sidebar collection' 'statistics statistics' 'spaces spaces' 'donate-bar donate-bar' 'footer footer';
   grid-template-columns: 1fr 2fr;
   column-gap: 36px;
+}
+
+.container {
+  width: 1140px;
+  margin: 0 auto;
 }
 
 .btn {
@@ -22,6 +25,11 @@ a {
   color: white;
   padding: 16px;
   cursor: pointer;
+}
+
+.btn.inverse {
+  background-color: white;
+  color: rgb(66,196,227);
 }
 
 .card {
@@ -45,7 +53,7 @@ a {
   margin: 16px 0;
 }
 
-.mini-card img {
+.mini-card .image {
   width: 100%;
 }
 
@@ -209,27 +217,84 @@ div.collection h2 {
   margin-bottom: 28px;
   background-color: rgb(243,244,248);
   box-shadow: 5px 5px 5px rgb(163,166,177);
-  width: 47%;
+  width: 30%;
 }
 
 /* statistics */
 div.statistics {
   grid-area: statistics;
+  display: flex;
+  background-color: rgb(66,196,227);
+  justify-content: space-around;
+  padding: 48px;
 }
 
+.statistics .mini-card .image {
+  background-color: rgba(255, 255, 255, 0.26);
+  padding: 12px;
+}
+
+.statistics .mini-card .info div {
+  color: white;
+}
+
+.statistics .mini-card .title {
+  font-size: 28px;
+}
 /* spaces */
 div.spaces {
   grid-area: spaces;
+  background-image: url("img/background/victor-xok-eHRzs3zunvQ-unsplash_editted.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
+
+.spaces .overlay {
+  height: 100%;
+  width: 100%;
+  background-color: rgba(22, 29, 57, 0.8);
+  padding: 180px 0;
+}
+
+.spaces .container {
+  display: flex;
+  justify-content: center;
+  color: white;
+}
+
+.overlay h2 {
+  font-size: 48px;
+  margin-bottom: 36px;
+}
+
+.overlay p {
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 36px;
+  line-height: 2;
+}
+
+.overlay .btn {
+  margin: 0 10px
+}
+
+.overlay .btn.secondary {
+}
+
 
 /* donate-bar */
 div.donate-bar {
   grid-area: donate-bar;
+  background-color: rgb(66,196,227);
+  height: 250px;
+  margin-bottom: 200px;
 }
 
 /* footer */
 div.footer {
   grid-area: footer;
+  background-color: rgb(22,29,57);
+  height: 250px;
 }
 
 

@@ -65,6 +65,7 @@ async function buildSidebar() {
   elements += buildTopBloggers(bloggers);
   $("div.sidebar").html(elements);
   addSearchBtnOnClick();
+  addSearchInputOnKeyup();
 
 }
 
@@ -76,12 +77,22 @@ function buildSearchBar() {
 }
 
 function addSearchBtnOnClick() {
-  $(".btn-search").on("click", function() {
+  $(".btn-search").on("click", function(e) {
     const keyword = $(".search-bar input").val();
     if (keyword != '') {
       buildCollection(keyword);
     }
     $(".search-bar input").val("");
+  });
+}
+
+function addSearchInputOnKeyup() {
+  $(".search-bar input").on("keyup", function(e) {
+    const keyword = $(".search-bar input").val();
+    if (keyword != '' && e.which == 13) {
+      buildCollection(keyword);
+      $(".search-bar input").val("");
+    }
   });
 }
 
@@ -110,7 +121,7 @@ function buildTopBloggers(topBloggers) {
   elements += `<div class="top-bloggers card"><h3>Top Bloggers</h3>`;
   topBloggers.forEach(blogger => {
     elements += `<div class="mini-card">
-                  <img src="img/${blogger.imageLink}">
+                  <img class="image" src="img/${blogger.imageLink}">
                   <div class="info">
                     <div class="title">${blogger.name}</div>
                     <div class="subtitle">${blogger.publishedBooks} Published Books</div>
@@ -124,7 +135,7 @@ function buildTopBloggers(topBloggers) {
 async function buildCollection(keyword) {
   const data = await getData("json/data-1.json");
   const bookAPI = data.restAPI[0];
-  const bookData = await getData(bookAPI.link + keyword + bookAPI.key);
+  const bookData = await getData(bookAPI.link + keyword + "&maxResults=18"+ bookAPI.key);
   const bookItems = bookData.items;
   let bookImgLinks = [];
   bookItems.forEach(book => {
@@ -144,6 +155,37 @@ async function buildCollection(keyword) {
   $("div.collection").html(elements);
 }
 
+async function buildStatistics() {
+  const data = await getData("json/data-1.json");
+  const statistics = data.statistics;
+  let elements = '';
+  statistics.forEach(stat => {
+    elements += `<div class="mini-card">
+                  <div class="image"><span class="material-icons-outlined md-light md-36">${stat.icon}</span></div>
+                  <div class="info">
+                    <div class="title">${stat.quantity}</div>
+                    <div class="subtitle">${stat.category}</div>
+                  </div>
+                </div>`
+  });
+  $(".statistics").html(elements);
+}
+
+function buildSpaces() {
+  let elements = '';
+  elements += `<div class="overlay">
+                <h2 class="container">Our Study Spaces & Rooms</h2>
+                <p class="container">Choose any of our comfortable study spaces and rooms.<br>We provide comfortable facilities for everyone</p>
+                <div class="container">
+                  <div class="btn">RESERVE A SPACE</div>
+                  <div class="btn inverse">EXPLORE OUR SPACES</div>
+                </div>
+              </div>`;
+  $(".spaces").html(elements);
+}
+
 buildTopBar();
 buildSidebar();
 buildCollection("harry potter");
+buildStatistics();
+buildSpaces();
