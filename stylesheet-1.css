@@ -25,10 +25,11 @@ a {
   color: white;
   padding: 16px;
   cursor: pointer;
+  text-align: center;
 }
 
 .btn.inverse {
-  background-color: white;
+  background-color: white !important;
   color: rgb(66,196,227);
 }
 
@@ -88,9 +89,11 @@ div.topbar {
   padding: 30px 0;
 }
 
-div.topbar .logo {
+.logo {
   display: flex;
   align-items: center;
+  width: 140px;
+  justify-content: space-between;
 }
 
 .logo span {
@@ -227,6 +230,7 @@ div.statistics {
   background-color: rgb(66,196,227);
   justify-content: space-around;
   padding: 48px;
+  margin-top: 100px;
 }
 
 .statistics .mini-card .image {
@@ -253,7 +257,7 @@ div.spaces {
   height: 100%;
   width: 100%;
   background-color: rgba(22, 29, 57, 0.8);
-  padding: 180px 0;
+  padding: 160px 0;
 }
 
 .spaces .container {
@@ -283,15 +287,58 @@ div.spaces {
 div.donate-bar {
   grid-area: donate-bar;
   background-color: rgb(66,196,227);
-  height: 250px;
-  margin-bottom: 200px;
+  margin-bottom: 160px;
+  display: flex;
+  justify-content: space-between;
+  padding: 80px;
+}
+
+.donate-bar h2 {
+  color: white;
+  font-size: 36px;
+  flex-grow: 1;
+  line-height: 1.8;
+}
+
+.donate-bar .btn-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.donate-bar .btn {
+  font-size: 24px;
+  font-weight: 500;
+  width: 100px;
+  background-color: rgb(104,208,233);
 }
 
 /* footer */
 div.footer {
   grid-area: footer;
   background-color: rgb(22,29,57);
-  height: 250px;
+  padding: 50px 0;
+}
+
+.footer .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer .logo span {
+  color: white;
+}
+
+.footer p, .footer a{
+  color: white;
+}
+
+.social-media .btn {
+  padding: 0;
+  background-color: transparent;
+  margin: 0 8px;
 }
 
 

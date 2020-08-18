@@ -2,8 +2,7 @@ function getData(url) {
   return $.getJSON(url, data => data);
 }
 
-async function buildNavbar() {
-  const data = await getData("json/data-1.json");
+function buildNavbar(data) {
   const navlist = data.navlist;
   let elements = '';
   elements += `<div class="navbar">`;
@@ -26,16 +25,16 @@ function buildLogo(brand, icon) {
           </a>`;
 }
 
-async function buildTopBar() {
+function buildTopBar(data) {
   let elements = '';
   elements += buildLogo("Ele<strong>Brary</strong>", "local_library");
-  elements += await buildNavbar();
+  elements += buildNavbar(data);
   $("div.topbar").html(elements);
   setDefaultPage("library-catalog");
-  addNavsOnClik();
+  addNavsOnClick();
 }
 
-function addNavsOnClik() {
+function addNavsOnClick() {
   $(".navbar a").on("click", function() {
     $(".navbar a").removeClass("active");
     this.classList.toggle("active");
@@ -53,8 +52,7 @@ function buildHeader() {
   $(".header").html(headerText);
 }
 
-async function buildSidebar() {
-  const data = await getData("json/data-1.json");
+function buildSidebar(data) {
   const categories = data.categories;
   const instagram = data.instagram;
   const bloggers = data.bloggers;
@@ -66,7 +64,6 @@ async function buildSidebar() {
   $("div.sidebar").html(elements);
   addSearchBtnOnClick();
   addSearchInputOnKeyup();
-
 }
 
 function buildSearchBar() {
@@ -132,8 +129,7 @@ function buildTopBloggers(topBloggers) {
   return elements;
 }
 
-async function buildCollection(keyword) {
-  const data = await getData("json/data-1.json");
+async function buildCollection(keyword, data) {
   const bookAPI = data.restAPI[0];
   const bookData = await getData(bookAPI.link + keyword + "&maxResults=18"+ bookAPI.key);
   const bookItems = bookData.items;
@@ -155,8 +151,7 @@ async function buildCollection(keyword) {
   $("div.collection").html(elements);
 }
 
-async function buildStatistics() {
-  const data = await getData("json/data-1.json");
+function buildStatistics(data) {
   const statistics = data.statistics;
   let elements = '';
   statistics.forEach(stat => {
@@ -172,20 +167,60 @@ async function buildStatistics() {
 }
 
 function buildSpaces() {
-  let elements = '';
-  elements += `<div class="overlay">
-                <h2 class="container">Our Study Spaces & Rooms</h2>
-                <p class="container">Choose any of our comfortable study spaces and rooms.<br>We provide comfortable facilities for everyone</p>
-                <div class="container">
-                  <div class="btn">RESERVE A SPACE</div>
-                  <div class="btn inverse">EXPLORE OUR SPACES</div>
-                </div>
-              </div>`;
+  let elements = `<div class="overlay">
+                    <h2 class="container">Our Study Spaces & Rooms</h2>
+                    <p class="container">Choose any of our comfortable study spaces and rooms.<br>We provide comfortable facilities for everyone</p>
+                    <div class="container">
+                      <div class="btn">RESERVE A SPACE</div>
+                      <div class="btn inverse">EXPLORE OUR SPACES</div>
+                    </div>
+                  </div>`;
   $(".spaces").html(elements);
 }
 
-buildTopBar();
-buildSidebar();
-buildCollection("harry potter");
-buildStatistics();
-buildSpaces();
+function buildDonateBar() {
+  let elements = `<h2>Support Our Library<br>Donate Today</h2>
+                  <div class="btn-group">
+                    <div class="btn">$3</div>
+                    <div class="btn inverse">$5</div>
+                    <div class="btn">$10</div>
+                    <div class="btn">Other</div>
+                  </div>`;
+  $(".donate-bar").html(elements);
+  addDonateBtnOnClick();
+}
+
+function addDonateBtnOnClick() {
+  $(".donate-bar .btn").on("click", function() {
+    $(".donate-bar .btn").removeClass("inverse");
+    this.classList.toggle("inverse");
+  });
+}
+
+function buildFooter() {
+  let elements = '<div class="container">';
+  elements += buildLogo("Ele<strong>Brary</strong>", "local_library");
+  elements += ` <p>©Copyright 2020. Powered by WPDeveloper</p>
+                <a href="#">Terms of Services</a>
+                <div class="social-media">
+                  <img class="btn" src="svg/facebook.svg">
+                  <img class="btn" src="svg/twitter.svg">
+                  <img class="btn" src="svg/linkedin.svg">
+                  <img class="btn" src="svg/instagram.svg">
+                </div>
+              </div>`;
+  $(".footer").html(elements);
+}
+
+async function main() {
+  const data = await getData("json/data-1.json");
+  buildTopBar(data);
+  buildSidebar(data);
+  buildCollection("attack on titan", data);
+  buildStatistics(data);
+  buildSpaces();
+  buildDonateBar();
+  buildFooter();
+}
+
+main();
