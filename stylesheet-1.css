@@ -247,7 +247,6 @@ div.statistics {
 }
 /* spaces */
 div.spaces {
-  grid-area: spaces;
   background-image: url("img/background/victor-xok-eHRzs3zunvQ-unsplash_editted.jpg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -285,7 +284,6 @@ div.spaces {
 
 /* donate-bar */
 div.donate-bar {
-  grid-area: donate-bar;
   background-color: rgb(66,196,227);
   margin-bottom: 160px;
   display: flex;
@@ -316,7 +314,6 @@ div.donate-bar {
 
 /* footer */
 div.footer {
-  grid-area: footer;
   background-color: rgb(22,29,57);
   padding: 50px 0;
 }
