@@ -62,8 +62,8 @@ function buildSidebar(data) {
   elements += buildInstagram(instagram);
   elements += buildTopBloggers(bloggers);
   $("div.sidebar").html(elements);
-  addSearchBtnOnClick();
-  addSearchInputOnKeyup();
+  addSearchBtnOnClick(data);
+  addSearchInputOnKeyup(data);
 }
 
 function buildSearchBar() {
@@ -73,21 +73,21 @@ function buildSearchBar() {
           </div>`;
 }
 
-function addSearchBtnOnClick() {
+function addSearchBtnOnClick(data) {
   $(".btn-search").on("click", function(e) {
     const keyword = $(".search-bar input").val();
     if (keyword != '') {
-      buildCollection(keyword);
+      buildCollection(keyword, data);
     }
     $(".search-bar input").val("");
   });
 }
 
-function addSearchInputOnKeyup() {
+function addSearchInputOnKeyup(data) {
   $(".search-bar input").on("keyup", function(e) {
     const keyword = $(".search-bar input").val();
     if (keyword != '' && e.which == 13) {
-      buildCollection(keyword);
+      buildCollection(keyword, data);
       $(".search-bar input").val("");
     }
   });
