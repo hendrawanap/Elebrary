@@ -16,8 +16,9 @@ a {
 }
 
 .container {
-  width: 1140px;
+  width: 100%;
   margin: 0 auto;
+  padding: 0 30px;
 }
 
 .btn {
@@ -220,7 +221,7 @@ div.collection h2 {
   margin-bottom: 28px;
   background-color: rgb(243,244,248);
   box-shadow: 5px 5px 5px rgb(163,166,177);
-  width: 30%;
+  width: 45%;
 }
 
 /* statistics */
@@ -256,7 +257,7 @@ div.spaces {
   height: 100%;
   width: 100%;
   background-color: rgba(22, 29, 57, 0.8);
-  padding: 160px 0;
+  padding: 10% 0;
 }
 
 .spaces .container {
@@ -278,7 +279,8 @@ div.spaces {
 }
 
 .overlay .btn {
-  margin: 0 10px
+  margin: 0 10px;
+  min-width: 18%;
 }
 
 
@@ -288,7 +290,7 @@ div.donate-bar {
   margin-bottom: 160px;
   display: flex;
   justify-content: space-between;
-  padding: 80px;
+  padding: 6% 10%;
 }
 
 .donate-bar h2 {
@@ -303,12 +305,15 @@ div.donate-bar {
   align-items: center;
   justify-content: space-between;
   flex-grow: 1;
+  flex-wrap: wrap;
 }
 
 .donate-bar .btn {
+  display: flex;
+  min-width: 20%;
   font-size: 24px;
   font-weight: 500;
-  width: 100px;
+  justify-content: center;
   background-color: rgb(104,208,233);
 }
 
@@ -338,6 +343,26 @@ div.footer {
   margin: 0 8px;
 }
 
+
+
+
+/* Responsive */
+
+@media (min-width: 992px) {
+  .collection img {
+    width: 30%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .main {
+    padding: 0;
+  }
+  .container {
+    width: 1200px;
+    padding: 0;
+  }
+}
 
 
 
