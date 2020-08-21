@@ -17,18 +17,18 @@ function buildNavbar(data) {
 function buildNavbarBtn() {
   return `
           <div class="btn btn-navbar">
-          <span class="material-icons-outlined menu active">menu</span><span class="material-icons-outlined close">close</span>
+          <span class="material-icons-outlined md-24 menu active">menu</span><span class="material-icons-outlined close md-24">close</span>
           </div>
           `;
 }
 
 function buildLoginButton() {
-  return `<div class="btn btn-login material-icons">login</div>`;
+  return `<div class="btn btn-login material-icons md-24">login</div>`;
 }
 
 function buildLogo(brand, icon) {
   return `<a class="logo" href="#">
-            <span class="material-icons-outlined">${icon}</span><span class="brand">${brand}</span>
+            <span class="material-icons-outlined md-24">${icon}</span><span class="brand">${brand}</span>
           </a>`;
 }
 
@@ -104,7 +104,7 @@ function buildSearchBar(isVoid=true) {
               <div class="search-bar">
                 <div class="container">
                 <input type="text" placeholder="Search by book title, author name">
-                <div class="btn btn-search material-icons-outlined">search</div>
+                <div class="btn btn-search material-icons-outlined md-24">search</div>
                 </div>
               </div>
               `;

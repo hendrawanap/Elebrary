@@ -8,12 +8,16 @@ a {
   text-decoration: none;
 }
 
+body {
+  font-family: "Noto Sans";
+}
+
 .container {
   display: flex;
   padding: 14px;
   justify-content: center;
   flex-wrap: wrap;
-  max-width: 500px;
+  max-width: 1140px;
   margin: 0 auto;
 }
 
@@ -41,7 +45,7 @@ a {
 .topbar .btn {
   background-color: transparent;
   color: rgb(22,29,57);
-  padding: 0
+  padding: 0;
 }
 
 .btn-navbar {
@@ -58,7 +62,7 @@ a {
 }
 
 .logo {
-  font-size: 24px;
+  font-size: 2rem;
   color: rgb(22,29,57);
 }
 
@@ -78,7 +82,7 @@ a {
 }
 
 .navbar a {
-  font-size: 18px;
+  font-size: 1.6rem;
   padding-bottom: 10px;
 }
 
@@ -88,7 +92,7 @@ a {
 
 .header {
   color: rgb(22,29,57);
-  font-size: 36px;
+  font-size: 3rem;
   padding: 80px 0;
 }
 
@@ -105,10 +109,7 @@ a {
   border: none;
   background-color: rgb(243,244,248);
   padding-left: 12px;
-}
-
-.search-bar .btn {
-  font-size: 24px;
+  font-size: 1.6rem;
 }
 
 div.categories {
@@ -149,7 +150,7 @@ div.categories {
 
 .categories li {
   margin-right: 18px;
-  font-size: 18px;
+  font-size: 1.4rem;
   cursor: pointer;
 }
 
@@ -165,11 +166,10 @@ div.categories {
   display: none;
 }
 
-
 .collection h2 {
   width: 100%;
   color: rgb(53,62,96);
-  font-size: 24px;
+  font-size: 2rem;
 }
 
 .collection .book-container {
@@ -209,6 +209,7 @@ div.categories {
 .card h3 {
   width: 100%;
   margin-bottom: 12px;
+  font-size: 1.2rem;
 }
 
 .instagram {
@@ -242,18 +243,18 @@ div.categories {
 }
 
 .mini-card .title {
-  font-size: 12px;
+  font-size: 1rem;
   font-weight: bold;
   width: 100%;
   margin-bottom: 8px;
 }
 
 .mini-card .subtitle {
-  font-size: 10px;
+  font-size: 0.8rem;
 }
 
 .statistics, .donate-bar {
-  padding: 0 40px;
+  /* padding: 0 40px; */
 }
 
 .statistics .container, .donate-bar .container {
@@ -262,6 +263,7 @@ div.categories {
   flex-wrap: wrap;
   justify-content: space-around;
   padding: 40px 20px;
+  width: 60%;
 }
 
 .statistics .mini-card .image {
@@ -293,8 +295,17 @@ div.categories {
   text-align: center;
 }
 
+.spaces .overlay h2 {
+  font-size: 2rem;
+}
+
+.spaces .overlay p {
+  font-size: 1rem;
+}
+
 .spaces .overlay .btn {
   margin-bottom: 12px;
+  font-size: 0.8rem;
 }
 
 .donate-bar {
@@ -306,6 +317,7 @@ div.categories {
   width: 100%;
   text-align: center;
   margin-bottom: 12px;
+  font-size: 1.6rem;
 }
 
 .donate-bar .btn-group {
@@ -318,6 +330,7 @@ div.categories {
   background-color: rgba(255, 255, 255, 0.25);
   min-width: 100px;
   margin-bottom: 12px;
+  font-size: 1.4rem;
 }
 
 .footer {
@@ -345,6 +358,23 @@ div.categories {
 
 
 
+/* Responsive */
+
+@media screen and (min-width: 320px) {
+  html {
+    font-size: calc(10px + 8 * ((100vw - 320px) / 880));
+  }
+}
+@media screen and (min-width: 1200px) {
+  html {
+    font-size: 18px;
+  }
+}
+
+
+
+
+
 
 
 
@@ -353,19 +383,19 @@ div.categories {
 /* Rules for sizing the icon. */
 .material-icons.md-18,
 .material-icons-outlined.md-18 {
-  font-size: 18px;
+  font-size: 1rem;
 }
 .material-icons.md-24,
 .material-icons-outlined.md-24 {
-  font-size: 24px;
+  font-size: 2rem;
 }
 .material-icons.md-36,
 .material-icons-outlined.md-36 {
-  font-size: 36px;
+  font-size: 3rem;
 }
 .material-icons.md-48,
 .material-icons-outlined.md-48 {
-  font-size: 48px;
+  font-size: 4rem;
 }
 
 /* Rules for using icons as black on a light background. */
