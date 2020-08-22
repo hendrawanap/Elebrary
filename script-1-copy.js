@@ -5,12 +5,17 @@ function getData(url) {
 function buildNavbar(data) {
   const navlist = data.navlist;
   let elements = '';
-  elements += `<div class="navbar">`;
+  let navs = '';
   navlist.forEach(nav => {
     let lowerCase = nav.nav.replace(/ /g, "-").toLowerCase();
-    elements += `<a id="link-${lowerCase}" data-header="${nav.dataHeader}" href="#">${nav.nav}</a>`;
+    navs += `<a id="link-${lowerCase}" data-header="${nav.dataHeader}" href="#">${nav.nav}</a>`;
   });
-  elements += `</div>`;
+  elements += `
+              <div class="navbar">
+                ${navs}
+                ${buildLoginButton()}
+              </div>
+              `;
   return elements;
 }
 
@@ -23,12 +28,17 @@ function buildNavbarBtn() {
 }
 
 function buildLoginButton() {
-  return `<div class="btn btn-login material-icons md-24">login</div>`;
+  return `
+          <div class="btn btn-login">
+          <span class="material-icons md-24">login</span>
+          <span>LOGIN</span>
+          </div>
+          `;
 }
 
 function buildLogo(brand, icon) {
   return `<a class="logo" href="#">
-            <span class="material-icons-outlined md-24">${icon}</span><span class="brand">${brand}</span>
+            <span class="material-icons-outlined md-36">${icon}</span><span class="brand">${brand}</span>
           </a>`;
 }
 
@@ -96,6 +106,7 @@ function buildSidebar(data) {
   $("div.sidebar").html(elements);
   addSearchBtnOnClick(data);
   addSearchInputOnKeyup(data);
+  addCategoryOnClick();
 }
 
 function buildSearchBar(isVoid=true) {
@@ -110,6 +121,7 @@ function buildSearchBar(isVoid=true) {
               `;
   if (isVoid) {
     $(".header").after(elements);
+    $(".search-bar").addClass("outer");
   } else return elements;
 }
 
@@ -153,6 +165,7 @@ function buildCategories(categories, isVoid=true) {
               `
   if (isVoid) {
     $(".search-bar").after(elements);
+    $(".categories").addClass("outer");
     addScrollBtnOnClick();
     addCategoryOnClick();
   }
@@ -219,12 +232,10 @@ async function buildCollection(keyword, data) {
     books += `<img src="${link}">`
   });
   elements += `
-              <div class="container">
                 <h2>Search results: '${keyword}'</h2>
                 <div class="book-container">
                   ${books}
                 </div>
-              </div>
               `
   $("div.collection").html(elements);
   console.log("2");
@@ -237,7 +248,7 @@ function buildStatistics(data) {
   statistics.forEach(stat => {
     miniCards += `
                 <div class="mini-card">
-                  <div class="image material-icons-outlined">${stat.icon}</div>
+                  <div class="image material-icons-outlined md-24">${stat.icon}</div>
                   <div class="info">
                     <div class="title">${stat.quantity}</div>
                     <div class="subtitle">${stat.category}</div>
@@ -258,7 +269,7 @@ function buildSpaces() {
                     <div class="container">
                       <h2>Our Study Spaces & Rooms</h2>
                       <p>Choose any of our comfortable study spaces and rooms.<br>We provide comfortable facilities for everyone</p>
-                      <div>
+                      <div class="btn-group">
                         <div class="btn">RESERVE A SPACE</div>
                         <div class="btn inverse">EXPLORE OUR SPACES</div>
                       </div>
@@ -306,18 +317,23 @@ function buildFooter() {
 }
 
 async function main() {
-  const data = await getData("json/data-1.json");
-  buildTopBar(data);
   buildSearchBar();
-  buildCategories(data.categories);
-  buildSidebar(data);
-  console.log("1");
-  buildCollection("attack on titan", data);
-  console.log("3");
-  buildStatistics(data);
   buildSpaces();
   buildDonateBar();
   buildFooter();
+  window.onscroll = function() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      $(".topbar").css("box-shadow", "0 1px 4px grey");
+    } else {
+      $(".topbar").css("box-shadow", "none");
+    }
+  }
+  const data = await getData("json/data-1.json");
+  buildTopBar(data);
+  buildCategories(data.categories);
+  buildSidebar(data);
+  buildCollection("attack on titan", data);
+  buildStatistics(data);
 }
 
 main();
