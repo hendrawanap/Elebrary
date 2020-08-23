@@ -5,18 +5,35 @@ function getData(url) {
 function buildNavbar(data) {
   const navlist = data.navlist;
   let elements = '';
-  elements += `<div class="navbar">`;
+  let navs = '';
   navlist.forEach(nav => {
     let lowerCase = nav.nav.replace(/ /g, "-").toLowerCase();
-    elements += `<a id="link-${lowerCase}" data-header="${nav.dataHeader}" href="#">${nav.nav}</a>`;
+    navs += `<a id="link-${lowerCase}" data-header="${nav.dataHeader}" href="#">${nav.nav}</a>`;
   });
-  elements += buildLoginButton();
-  elements += `</div>`;
+  elements += `
+              <div class="navbar">
+                ${navs}
+                ${buildLoginButton()}
+              </div>
+              `;
   return elements;
 }
 
+function buildNavbarBtn() {
+  return `
+          <div class="btn btn-navbar">
+          <span class="material-icons-outlined md-24 menu active">menu</span><span class="material-icons-outlined close md-24">close</span>
+          </div>
+          `;
+}
+
 function buildLoginButton() {
-  return `<div class="btn btn-login">LOGIN</div>`;
+  return `
+          <div class="btn btn-login">
+          <span class="material-icons md-24">login</span>
+          <span>LOGIN</span>
+          </div>
+          `;
 }
 
 function buildLogo(brand, icon) {
@@ -27,11 +44,26 @@ function buildLogo(brand, icon) {
 
 function buildTopBar(data) {
   let elements = '';
-  elements += buildLogo("Ele<strong>Brary</strong>", "local_library");
-  elements += buildNavbar(data);
+  elements += `
+              <div class="container">
+                ${buildNavbarBtn()}
+                ${buildLogo("Ele<strong>Brary</strong>", "local_library")}
+                ${buildLoginButton()}
+                ${buildNavbar(data)}
+              </div>
+              `;
   $("div.topbar").html(elements);
   setDefaultPage("library-catalog");
   addNavsOnClick();
+  addNavBtnOnClick();
+}
+
+function addNavBtnOnClick() {
+  $(".btn-navbar").on("click", function() {
+    document.querySelector(".navbar").classList.toggle("active");
+    this.querySelector("span.menu").classList.toggle("active");
+    this.querySelector("span.close").classList.toggle("active");
+  })
 }
 
 function addNavsOnClick() {
@@ -49,7 +81,13 @@ function setDefaultPage(page) {
 
 function buildHeader() {
   const headerText = $(".navbar a.active").data("header");
-  $(".header").html(headerText);
+  let elements = '';
+  elements = `
+              <div class="container">
+                ${headerText}
+              </div>
+            `;
+  $(".header").html(elements);
 }
 
 function buildSidebar(data) {
@@ -57,20 +95,34 @@ function buildSidebar(data) {
   const instagram = data.instagram;
   const bloggers = data.bloggers;
   let elements = '';
-  elements += buildSearchBar();
-  elements += buildCategories(categories);
-  elements += buildInstagram(instagram);
-  elements += buildTopBloggers(bloggers);
+  elements += `
+              <div class="container">
+                ${buildSearchBar(false)}
+                ${buildCategories(categories, false)}
+                ${buildInstagram(instagram)}
+                ${buildTopBloggers(bloggers)}
+              </div>
+              `
   $("div.sidebar").html(elements);
   addSearchBtnOnClick(data);
   addSearchInputOnKeyup(data);
+  addCategoryOnClick();
 }
 
-function buildSearchBar() {
-  return `<div class="search-bar">
-            <input type="text" placeholder="Search by book title, author name">
-            <div class="btn btn-search material-icons-outlined md-36">search</div>
-          </div>`;
+function buildSearchBar(isVoid=true) {
+  let elements = '';
+  elements += `
+              <div class="search-bar">
+                <div class="container">
+                <input type="text" placeholder="Search by book title, author name">
+                <div class="btn btn-search material-icons-outlined md-24">search</div>
+                </div>
+              </div>
+              `;
+  if (isVoid) {
+    $(".header").after(elements);
+    $(".search-bar").addClass("outer");
+  } else return elements;
 }
 
 function addSearchBtnOnClick(data) {
@@ -93,14 +145,47 @@ function addSearchInputOnKeyup(data) {
   });
 }
 
-function buildCategories(categories) {
+function buildCategories(categories, isVoid=true) {
   let elements = '';
-  elements += `<div class="categories card"><h3>Categories</h3><ul>`;
+  let li = '';
   categories.forEach(category => {
-    elements += `<li><span>${category.category}</span><span>${category.counts}</span></li>`;
+    li += `<li><span>${category.category}</span><span class="counts">${category.counts}</span></li>`;
   });
-  elements += `</ul></div>`;
+  elements += `
+              <div class="categories card">
+                <div class="container">
+                  <h3>Categories</h3>
+                  <span class="btn scroll-back material-icons">keyboard_arrow_left</span>
+                  <ul>
+                    ${li}
+                  </ul>
+                  <span class="btn scroll-forward material-icons">keyboard_arrow_right</span>
+                </div>
+              </div>
+              `
+  if (isVoid) {
+    $(".search-bar").after(elements);
+    $(".categories").addClass("outer");
+    addScrollBtnOnClick();
+    addCategoryOnClick();
+  }
   return elements;
+}
+
+function addScrollBtnOnClick() {
+  $(".categories .scroll-forward").on("click", function() {
+    document.querySelector(".categories ul").scrollBy(200, 0);
+  });
+  $(".categories .scroll-back").on("click", function() {
+    document.querySelector(".categories ul").scrollBy(-200, 0);
+  });
+}
+
+function addCategoryOnClick() {
+  $(".categories li").on("click", function() {
+    $(".categories li.active").removeClass("active");
+    this.classList.toggle("active");
+  });
 }
 
 function buildInstagram(instagram) {
@@ -142,50 +227,69 @@ async function buildCollection(keyword, data) {
     }
   });
   let elements = '';
-  elements += `<h2>Search results: '${keyword}'</h2>`;
-  elements += `<div class="img-container">`;
+  let books = '';
   bookImgLinks.forEach(link => {
-    elements += `<img src="${link}">`
+    books += `<img src="${link}">`
   });
-  elements += `</div>`;
+  elements += `
+                <h2>Search results: '${keyword}'</h2>
+                <div class="book-container">
+                  ${books}
+                </div>
+              `
   $("div.collection").html(elements);
+  console.log("2");
 }
 
 function buildStatistics(data) {
   const statistics = data.statistics;
   let elements = '';
+  let miniCards = '';
   statistics.forEach(stat => {
-    elements += `<div class="mini-card">
-                  <div class="image"><span class="material-icons-outlined md-light md-36">${stat.icon}</span></div>
+    miniCards += `
+                <div class="mini-card">
+                  <div class="image material-icons-outlined md-24">${stat.icon}</div>
                   <div class="info">
                     <div class="title">${stat.quantity}</div>
                     <div class="subtitle">${stat.category}</div>
                   </div>
-                </div>`
+                </div>
+                `;
   });
+  elements += `
+              <div class="container">
+                ${miniCards}
+              </div>
+              `
   $(".statistics").html(elements);
 }
 
 function buildSpaces() {
   let elements = `<div class="overlay">
-                    <h2 class="container">Our Study Spaces & Rooms</h2>
-                    <p class="container">Choose any of our comfortable study spaces and rooms.<br>We provide comfortable facilities for everyone</p>
                     <div class="container">
-                      <div class="btn">RESERVE A SPACE</div>
-                      <div class="btn inverse">EXPLORE OUR SPACES</div>
+                      <h2>Our Study Spaces & Rooms</h2>
+                      <p>Choose any of our comfortable study spaces and rooms.<br>We provide comfortable facilities for everyone</p>
+                      <div class="btn-group">
+                        <div class="btn">RESERVE A SPACE</div>
+                        <div class="btn inverse">EXPLORE OUR SPACES</div>
+                      </div>
                     </div>
                   </div>`;
   $(".spaces").html(elements);
 }
 
 function buildDonateBar() {
-  let elements = `<h2>Support Our Library<br>Donate Today</h2>
-                  <div class="btn-group">
-                    <div class="btn">$3</div>
-                    <div class="btn inverse">$5</div>
-                    <div class="btn">$10</div>
-                    <div class="btn">Other</div>
-                  </div>`;
+  let elements = `
+                  <div class="container">
+                    <h3>Support Our Library<br>Donate Today</h3>
+                    <div class="btn-group">
+                      <div class="btn">$3</div>
+                      <div class="btn inverse">$5</div>
+                      <div class="btn">$10</div>
+                      <div class="btn">Other</div>
+                    </div>
+                  </div>
+                  `;
   $(".donate-bar").html(elements);
   addDonateBtnOnClick();
 }
@@ -213,14 +317,23 @@ function buildFooter() {
 }
 
 async function main() {
-  const data = await getData("json/data-1.json");
-  buildTopBar(data);
-  buildSidebar(data);
-  buildCollection("attack on titan", data);
-  buildStatistics(data);
+  buildSearchBar();
   buildSpaces();
   buildDonateBar();
   buildFooter();
+  window.onscroll = function() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      $(".topbar").css("box-shadow", "0 1px 4px grey");
+    } else {
+      $(".topbar").css("box-shadow", "none");
+    }
+  }
+  const data = await getData("json/data-1.json");
+  buildTopBar(data);
+  buildCategories(data.categories);
+  buildSidebar(data);
+  buildCollection("attack on titan", data);
+  buildStatistics(data);
 }
 
 main();
